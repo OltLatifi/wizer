@@ -30,6 +30,16 @@ class HomeworkView(generics.CreateAPIView):
     serializer_class = HomeworkSerializer
 
 
+class SubjectListView(generics.ListAPIView):
+    queryset = Homework.objects.all()
+    serializer_class = SubjectSerializer
+
+
+class HomeworkListView(generics.ListAPIView):
+    queryset = Homework.objects.all()
+    serializer_class = HomeworkSerializer
+
+
 class custom_user_register(APIView):
     permission_classes = [AllowAny,]
 
