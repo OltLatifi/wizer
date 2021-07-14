@@ -31,7 +31,7 @@ class HomeworkView(generics.CreateAPIView):
 
 
 class SubjectListView(generics.ListAPIView):
-    queryset = Homework.objects.all()
+    queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
 
