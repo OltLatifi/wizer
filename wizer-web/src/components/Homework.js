@@ -7,19 +7,21 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 200,
+        minWidth: 250,
         maxWidth: 350,
         margin: '2%',
-        backgroundColor:'#47597E',
-        color: '#DBE6FD',
+        color: 'black',
+        borderLeft: '6px solid black',
+        backgroundColor: '#ebebeb',
     },
 
     finishedRoot: {
-        minWidth: 200,
+        minWidth: 250,
         maxWidth: 350,
         margin: '2%',
-        backgroundColor:'#3f4a5e',
-        color: '#DBE6FD',
+        color: 'black',
+        borderLeft: '6px solid black',
+        backgroundColor: 'white',
       },
     title: {
         fontSize: 14,
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
     },
     secondary: {
         fontSize: 14,
-        color: '#ccc6ab',
+        color: '#343536',
         marginBottom: 12,
     },
   });
