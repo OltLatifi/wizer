@@ -43,6 +43,10 @@ class HomeworkUpdateView(generics.UpdateAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
 
+# delete
+class HomeworkDeleteView(generics.DestroyAPIView):
+    queryset = Homework.objects.all()
+    serializer_class = HomeworkSerializer
 
 
 class custom_user_register(APIView):

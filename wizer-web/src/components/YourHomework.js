@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CardActions from '@material-ui/core/CardActions';
+
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -136,7 +139,7 @@ function YourHomework(props) {
         .catch((error) =>alert(error.message))
     }
 
-
+    // updates homework(finished or not)
     const updateHomework=(title, finished, subject, id) => {
         let formData = new FormData()
         
@@ -151,6 +154,16 @@ function YourHomework(props) {
             setHomework([response.data, ...homework])
         })
     }
+
+    // deletes the homework
+    const deleteHomework =(id)=>{
+        axios.delete(`http://localhost:8000/api/delete-homework/${id}`, {
+          data: {
+            source: 'source'
+          }
+        }).then(response=>getHomework())
+        
+      }
 
     return (
     <div className={classes.root}>
@@ -271,7 +284,12 @@ function YourHomework(props) {
                             }
                     description={h.description}
                     subject={h.subject.name}
-                    key={h.id}
+                    id={h.id}
+                    deleteButton={
+                        <CardActions>
+                            <Button size="small" onClick={()=>deleteHomework(h.id)}><DeleteIcon/></Button>
+                        </CardActions>
+                    }
                     />
                     )
                 })}
