@@ -69,6 +69,15 @@ function YourHomework(props) {
     // buttons for filtering by subjects
     const[subjects, setSubjects] = useState([]);
 
+
+
+    const finishedEverything =()=>{
+        // if all homework is finished and homework exists
+        if(homework.filter(hw=>!hw.finished).length === 0 && homework.length!==0){
+            alert("You finished all your homework! Feel free to delete the finished data.")
+        }
+    }
+
     // get the homework from the api
     const getHomework=()=>{
         axios.get('http://localhost:8000/api/see-homework/')
@@ -76,6 +85,7 @@ function YourHomework(props) {
             setHomework(response.data)
             setMenuItems(response.data)
         })
+
     }
     // get the subjects from the api
     const getSubjects=()=>{
@@ -96,19 +106,24 @@ function YourHomework(props) {
     const finished =()=>{
         const filteredData = homework.filter(homework_=> homework_.finished===true)
         setMenuItems(filteredData)
+        finishedEverything()
     }
     const toFinish =()=>{
         const filteredData = homework.filter(homework_=> homework_.finished===false)
         setMenuItems(filteredData)
+        finishedEverything()
     }
     // turns things back to normal by reusing the data we got from the api
     const all =()=>{
         setMenuItems(homework)
+        finishedEverything()
+        
     }
     // filter by subjects
     const filter =(subject)=>{
         const filteredData = homework.filter(homework_=> homework_.subject.name===subject)
         setMenuItems(filteredData)
+        finishedEverything()
     }
 
 
@@ -137,6 +152,8 @@ function YourHomework(props) {
         .then((response) =>getHomework())
         .then(response=> alert('Homework added succesfully!'))
         .catch((error) =>alert(error.message))
+
+
     }
 
     // updates homework(finished or not)
@@ -153,6 +170,7 @@ function YourHomework(props) {
             getHomework()
             setHomework([response.data, ...homework])
         })
+
     }
 
     // deletes the homework
