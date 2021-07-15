@@ -131,8 +131,25 @@ function YourHomework(props) {
         formData.append('subject', subjects_)
 
         axios.post("http://localhost:8000/api/homework/", formData)
-        .then((response) =>console.log(response.data))
-        window.location.reload(false)
+        .then((response) =>getHomework())
+        .then(response=> alert('Homework added succesfully!'))
+        .catch((error) =>alert(error.message))
+    }
+
+
+    const updateHomework=(title, finished, subject, id) => {
+        let formData = new FormData()
+        
+        formData.append('title', title)
+        formData.append('finished', finished)
+        formData.append('subject', subject)
+        
+        console.log(formData)
+        axios.put(`http://localhost:8000/api/update-homework/${id}`, formData)
+        .then((response) =>{
+            getHomework()
+            setHomework([response.data, ...homework])
+        })
     }
 
     return (
@@ -241,7 +258,17 @@ function YourHomework(props) {
                     <Homework
                     title={h.title}
                     due_date={h.due_date.split("T")[0]} // cuts off the hour and timezone rubbish
-                    finished={h.finished? '✅': 'False'}
+                    finished={
+                        h.finished? '✅': 
+                        <input
+                            type="checkbox"
+                            onChange={(e) => updateHomework(
+                                h.title,
+                                e.target.checked,
+                                h.subject.id,
+                                h.id,)}>
+                        </input>
+                            }
                     description={h.description}
                     subject={h.subject.name}
                     key={h.id}

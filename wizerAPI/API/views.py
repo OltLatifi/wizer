@@ -18,8 +18,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
-
+# create
 class SubjectView(generics.CreateAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
@@ -29,7 +28,7 @@ class HomeworkView(generics.CreateAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
 
-
+# list
 class SubjectListView(generics.ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
@@ -38,6 +37,12 @@ class SubjectListView(generics.ListAPIView):
 class HomeworkListView(generics.ListAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
+
+# update
+class HomeworkUpdateView(generics.UpdateAPIView):
+    queryset = Homework.objects.all()
+    serializer_class = HomeworkSerializer
+
 
 
 class custom_user_register(APIView):
