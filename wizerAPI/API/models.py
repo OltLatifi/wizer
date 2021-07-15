@@ -22,4 +22,4 @@ class Homework(models.Model):
         return '{0} | {1}'.format(self.title, self.subject)
     
     class Meta:
-        ordering = ['-date']
+        ordering = ['due_date']

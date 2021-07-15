@@ -1,12 +1,15 @@
 import {useEffect, useState} from 'react'
 import Homework from './Homework'
+
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+
+
 import { makeStyles } from '@material-ui/core/styles';
 
 // the 'css'
@@ -52,6 +55,7 @@ const useStyles = makeStyles({
 
 function YourHomework(props) {
     const classes = useStyles();
+
 
     // the state that handles the homework
     const[homework, setHomework] = useState([]);
@@ -104,73 +108,102 @@ function YourHomework(props) {
         setMenuItems(filteredData)
     }
 
+
+    // data from the form
+    const[title, setTitle] = useState('')
+    const[date, setDate] = useState('')
+    const[description, setDescription] = useState('')
+    const[finished_, setFinished_] = useState('')
+    const[subjects_, setSubjects_] = useState('')
+    
+
+    
+    // submit button on the form
+    const buttonPressed=()=>{
+        // textInput.current.focus();
+
+        let formData = new FormData()
+
+        formData.append('title', title)
+        formData.append('date', `${date.split(" ")[0]}T${date.split(" ")[1]}:00Z`) // just making it compatible 
+        formData.append('description', description) //with the api
+        formData.append('finished', finished_)
+        formData.append('subject', subjects_)
+
+        axios.post("http://localhost:8000/api/homework/", formData)
+        .then((response) =>console.log(response.data))
+        window.location.reload(false)
+    }
+
     return (
     <div className={classes.root}>
 
         {/* the form */}
         <div className={classes.form}>
             <form autoComplete="off" style={{marginTop: '4%',}}>
-                <TextField
-                    id="outlined-basic"
-                    label="Title"
-                    variant="outlined"
-                    className={classes.input}
-                    />
-                    <br/><br/>
-                <TextField
-                    variant="outlined"
-                    type="datetime-local"
-                    rows={12}
-                    className={classes.input}
-                    // value={value}
-                    // onChange={handleChange}
-                    />
-                    <br/><br/>
-                <TextField
-                    id="outlined-multiline-flexible"
-                    variant="outlined"
-                    label="Description"
-                    multiline
-                    rows={12}
-                    className={classes.input}
-                    // value={value}
-                    // onChange={handleChange}
-                    />
-                    <br/><br/>
-                <center>
-                <Card variant="outlined" className={classes.checkbox}>
-                    <label htmlFor="finished">Finished: </label>
-                    <input
-                        id="finished"
-                        name="finished"
-                        type="checkbox"
-                        className={classes.input}
-                        // value={value}
-                        // onChange={handleChange}
-                        />
-                </Card>
-                </center>
-                <br/>
-                {/* the select input */}
-                <TextField
-                    select
-                    label="Subject"
-                    variant="outlined"
-                    className={classes.input}
-                    // value={currency}
-                    // onChange={handleChange}
-                    >
-                    {subjects.map((option) => (
-                        <MenuItem key={option.name} value={option.name}>
-                        {option.name}
-                        </MenuItem>
-                    ))}
-                </TextField>
+            <TextField
+                id="outlined-basic"
+                label="Title"
+                variant="outlined"
+                className={classes.input}
+                onChange={e => setTitle(e.target.value)}
+                // ref={textInput}
+                />
                 <br/><br/>
-                <Button variant="outlined" className={classes.input}>To finish</Button>
-                
-                
-            </form>
+            <TextField
+                variant="outlined"
+                type="datetime-local"
+                rows={12}
+                className={classes.input}
+                onChange={e => setDate(e.target.value)}
+                // ref={textInput}
+                />
+                <br/><br/>
+            <TextField
+                id="outlined-multiline-flexible"
+                variant="outlined"
+                label="Description"
+                multiline
+                rows={12}
+                className={classes.input}
+                onChange={e =>setDescription(e.target.value)}
+                // ref={textInput}
+                />
+                <br/><br/>
+            <center>
+            <Card variant="outlined" className={classes.checkbox}>
+                <label htmlFor="finished">Finished: </label>
+                <input
+                    id="finished"
+                    name="finished"
+                    type="checkbox"
+                    className={classes.input}
+                    onChange={e => setFinished_(e.target.checked)}
+                    // ref={textInput}
+                    />
+            </Card>
+            </center>
+            <br/>
+            {/* the select input */}
+            <TextField
+                select defaultValue=""
+                label="Subject"
+                variant="outlined"
+                className={classes.input}
+                onChange={e =>setSubjects_(e.target.value)}
+                // ref={textInput}
+                >
+                {subjects.map((option, key) => (
+                    <MenuItem key={key} value={option.id} >
+                    {option.name}
+                    </MenuItem>
+                ))}
+            </TextField>
+            <br/><br/>
+            <Button variant="outlined" className={classes.input} onClick={buttonPressed}>Submit</Button>
+            
+            
+        </form>
         </div>
         
         
