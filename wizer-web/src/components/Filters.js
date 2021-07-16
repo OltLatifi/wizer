@@ -2,8 +2,10 @@ import React from 'react'
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Card from '@material-ui/core/Card';
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import Typography from '@material-ui/core/Typography';
+
+import RemoveRoundedIcon from '@material-ui/icons/RemoveRounded';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -33,7 +35,7 @@ function Filters(props) {
 
 
         {/* generating subject buttons so we can filter by subjects */}
-        <Typography variant="h6" component="h6" className={classes.text}>Filter by subjects</Typography>
+        <Typography variant="h6" component="h6" className={classes.text}>Subjects:</Typography>
             {props.subjects.map((b, key) => {
                 return(
                     <Button
@@ -52,6 +54,12 @@ function Filters(props) {
             variant="outlined"
             className={classes.round}>
                     <AddRoundedIcon/>
+            </Button>
+        <Button
+            onClick={()=>props.setShowSubjectForm(true)}
+            variant="outlined"
+            className={classes.round}>
+                    <RemoveRoundedIcon/>
             </Button>
 
 

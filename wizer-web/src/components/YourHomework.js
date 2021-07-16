@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
 import SubjectForm from './SubjectForm'
 import HomeworkForm from './HomeworkForm'
