@@ -1,7 +1,15 @@
 import './css/App.css'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import YourHomework from './components/YourHomework'
+import YourHomework from './components/dashboard/YourHomework'
+import Pomodoro from './components/pomodoro/Pomodoro'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
@@ -122,29 +130,41 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <YourHomework
-        homework={homework}
-        setMenuItems={setMenuItems}
-        setSubjectText={setSubjectText}
-        createSubject={createSubject}
-        setTitle={setTitle}
-        setDate={setDate}
-        setDescription={setDescription}
-        setFinished_={setFinished_}
-        setSubjects_={setSubjects_}
-        subjects={subjects}
-        buttonPressed={buttonPressed}
-        menuItems={menuItems}
-        updateHomework={updateHomework}
-        deleteHomework={deleteHomework}
-        deleteSubject_={deleteSubject_}
-        showSubjectDelete={showSubjectDelete}
-        setShowSubjectDelete={setShowSubjectDelete}
-        showSubjectForm={showSubjectForm}
-        setShowSubjectForm={setShowSubjectForm}
-        />
-    </div>
+    <Router>
+      <Switch>
+        <Route path='/dashboard'>
+
+        <div className="App">
+          <YourHomework
+            homework={homework}
+            setMenuItems={setMenuItems}
+            setSubjectText={setSubjectText}
+            createSubject={createSubject}
+            setTitle={setTitle}
+            setDate={setDate}
+            setDescription={setDescription}
+            setFinished_={setFinished_}
+            setSubjects_={setSubjects_}
+            subjects={subjects}
+            buttonPressed={buttonPressed}
+            menuItems={menuItems}
+            updateHomework={updateHomework}
+            deleteHomework={deleteHomework}
+            deleteSubject_={deleteSubject_}
+            showSubjectDelete={showSubjectDelete}
+            setShowSubjectDelete={setShowSubjectDelete}
+            showSubjectForm={showSubjectForm}
+            setShowSubjectForm={setShowSubjectForm}
+            />
+        </div>
+
+        </Route>
+        <Route path="/pomodoro">
+          <Pomodoro/>
+        </Route>
+      </Switch>
+    </Router>
+    
   );
 }
 
