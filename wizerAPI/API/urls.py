@@ -8,6 +8,7 @@ from .views import (
     HomeworkListView,
     HomeworkUpdateView,
     HomeworkDeleteView,
+    SubjectDeleteView,
     )
 
 urlpatterns = [
@@ -16,5 +17,6 @@ urlpatterns = [
     path('update-homework/<int:pk>', HomeworkUpdateView.as_view()),
     path('delete-homework/<int:pk>', HomeworkDeleteView.as_view()),
     path('see-subject/', SubjectListView.as_view()),
+    path('delete-subject/<int:pk>', SubjectDeleteView.as_view()),
     path('see-homework/', HomeworkListView.as_view()),
 ]

@@ -40,7 +40,9 @@ function Filters(props) {
                 return(
                     <Button
                         variant="outlined"
-                        onClick={()=> props.filter(b.name)}
+                        onClick={props.showSubjectDelete? ()=> props.deleteSubject_(b.id):()=>props.filter(b.name)}
+                        // onClick={props.showSubjectDelete? ()=>console.log('delete'):()=>console.log('filter')}
+                        // if delete button is pressed delete...
                         key={key}
                         className={classes.round}>
                             {b.name}
@@ -55,8 +57,9 @@ function Filters(props) {
             className={classes.round}>
                     <AddRoundedIcon/>
             </Button>
+            
         <Button
-            onClick={()=>props.setShowSubjectForm(true)}
+            onClick={()=>props.setShowSubjectDelete(true)}
             variant="outlined"
             className={classes.round}>
                     <RemoveRoundedIcon/>
@@ -65,6 +68,7 @@ function Filters(props) {
 
     {/* subject form */}
     {props.showSubjectF()}
+    {props.deleteSubjects()}
 
     </Card>
     )

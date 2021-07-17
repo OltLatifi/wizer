@@ -48,6 +48,9 @@ class HomeworkDeleteView(generics.DestroyAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
 
+class SubjectDeleteView(generics.DestroyAPIView):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
 
 class custom_user_register(APIView):
     permission_classes = [AllowAny,]

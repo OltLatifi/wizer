@@ -35,7 +35,8 @@ const useStyles = makeStyles({
 
 function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
     setTitle, setDate, setDescription, setFinished_, setSubjects_, subjects, buttonPressed,
-    menuItems, updateHomework, deleteHomework}) {
+    menuItems, updateHomework, deleteHomework, deleteSubject_, showSubjectDelete, setShowSubjectDelete,
+    showSubjectForm, setShowSubjectForm}) {
 
     const classes = useStyles();
 
@@ -78,12 +79,6 @@ function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
     }
 
 
-    
-
-    // data for the subject form
-    const[showSubjectForm, setShowSubjectForm] = useState(false)
-    
-
 
     
 
@@ -108,6 +103,7 @@ function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
             return(
                 <SubjectForm
                 setSubject={setSubjectText}
+                setShowSubjectForm={setShowSubjectForm}
                 submitButton={
                     <Button
                     variant="outlined"
@@ -118,6 +114,18 @@ function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
                 />
             )
         }
+    }
+
+    const deleteSubjects=()=>{
+        if(showSubjectDelete){
+            return(
+                <Typography variant="body2">
+                    Click the subject you want to delete.
+                    <Button onClick={()=>setShowSubjectDelete(false)} style={{color: 'black'}}>Cancel</Button>
+                </Typography>
+            )
+        }
+
     }
 
     return (
@@ -151,7 +159,12 @@ function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
                     subjects={subjects}
                     filter={filter}
                     setShowSubjectForm={setShowSubjectForm}
-                    showSubjectF={showSubjectF}/>
+                    showSubjectF={showSubjectF}
+                    setShowSubjectDelete={setShowSubjectDelete}
+                    showSubjectDelete={showSubjectDelete}
+                    deleteSubjects={deleteSubjects}
+                    deleteSubject_={deleteSubject_}/>
+                    {/* ^^^^ the one that actually deletes, the one on top sets the hook to true */}
 
                 <br/><br/>
                 {/* homework 'posts' */}

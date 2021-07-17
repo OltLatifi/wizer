@@ -29,6 +29,7 @@ function ListOfHomework({menuItems, updateHomework, deleteHomework}) {
                     description={h.description}
                     subject={h.subject.name}
                     id={h.id}
+                    key={h.id}
                     deleteButton={
                         <CardActions>
                             <Button size="small" onClick={()=>deleteHomework(h.id)}><DeleteIcon/></Button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
     },
   });
 
-function SubjectForm({setSubject, submitButton}) {
+function SubjectForm({setSubject, submitButton, setShowSubjectForm}) {
     const classes = useStyles();
 
     return(
@@ -30,6 +31,9 @@ function SubjectForm({setSubject, submitButton}) {
                 onChange={(e)=>{setSubject(e.target.value)}}
                 />
             {submitButton}  {/* button from parent*/}
+            <Typography variant="body2">Fill in the form to create a new subject.
+                <Button onClick={()=>setShowSubjectForm(false)}>Cancel</Button>
+            </Typography>
         </div>
     )
 }

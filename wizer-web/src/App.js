@@ -23,6 +23,11 @@ function App() {
     // data for the subject form
     const[subjectText, setSubjectText] = useState('')
 
+    // the one used to delete the subjects
+    const[showSubjectDelete, setShowSubjectDelete] = useState(false)    
+    // data for the subject form
+    const[showSubjectForm, setShowSubjectForm] = useState(false)
+    
 
     // get the homework from the api
     const getHomework=()=>{
@@ -101,7 +106,19 @@ function App() {
       formData.append('name', subjectText)
       axios.post("http://localhost:8000/api/subject/", formData)
       .then((response) =>getSubjects())
+      .then((response)=> setShowSubjectForm(false))
       .catch((error) =>alert(`${error.message}\nYou need to provide a name for the subject.`))
+  }
+
+  // deletes the subject
+  const deleteSubject_ =(id)=>{
+    axios.delete(`http://localhost:8000/api/delete-subject/${id}`, {
+      data: {
+        source: 'source'
+      }
+    }).then(response=>getSubjects())
+    .then(response=>setShowSubjectDelete(false))
+    
   }
   
   return (
@@ -120,7 +137,13 @@ function App() {
         buttonPressed={buttonPressed}
         menuItems={menuItems}
         updateHomework={updateHomework}
-        deleteHomework={deleteHomework}/>
+        deleteHomework={deleteHomework}
+        deleteSubject_={deleteSubject_}
+        showSubjectDelete={showSubjectDelete}
+        setShowSubjectDelete={setShowSubjectDelete}
+        showSubjectForm={showSubjectForm}
+        setShowSubjectForm={setShowSubjectForm}
+        />
     </div>
   );
 }

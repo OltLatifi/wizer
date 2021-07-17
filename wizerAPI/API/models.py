@@ -11,7 +11,7 @@ class Subject(models.Model):
 
 class Homework(models.Model):
     # user will be added
-    subject = models.ForeignKey(Subject, on_delete=models.PROTECT)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True, max_length=500)
     date = models.DateField(auto_now_add=True)
