@@ -57,7 +57,7 @@ function Register(props) {
             } else{
                 setUsernameWarning(true)
             }
-            if(password.split('').length>=8 || (email.includes('@','`','!','#','$','%','^','&','*','(',')','-','=','+','[',']','{','}',';',':','\'','"','<','>',',','.','?','/','|') && email.includes('1','2','3','4','5','6','7','8','9','0'))){
+            if(password.split('').length>=8 && (email.includes('@','`','!','#','$','%','^','&','*','(',')','-','=','+','[',']','{','}',';',':','\'','"','<','>',',','.','?','/','|') && email.includes('1','2','3','4','5','6','7','8','9','0'))){
                 setShowPasswordWarning(false)
                 
                 // if the email is not valid (doesn't contain '@example.com')
