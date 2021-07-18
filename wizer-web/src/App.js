@@ -1,8 +1,10 @@
 import './css/App.css'
-import axios from 'axios'
+import axiosInstance from './axios'
 import {useEffect, useState} from 'react'
 import YourHomework from './components/dashboard/YourHomework'
 import Pomodoro from './components/pomodoro/Pomodoro'
+import Login from './components/authentication/Login'
+import Register from './components/authentication/Register'
 
 import {
   BrowserRouter as Router,
@@ -39,7 +41,7 @@ function App() {
 
     // get the homework from the api
     const getHomework=()=>{
-      axios.get('http://localhost:8000/api/see-homework/')
+      axiosInstance.get('http://localhost:8000/api/see-homework/')
       .then(response => {
           setHomework(response.data)
           setMenuItems(response.data)
@@ -48,7 +50,7 @@ function App() {
       }
     // get the subjects from the api
     const getSubjects=()=>{
-        axios.get('http://localhost:8000/api/see-subject/')
+        axiosInstance.get('http://localhost:8000/api/see-subject/')
         .then(response => {
             setSubjects(response.data)
         })
@@ -73,10 +75,18 @@ function App() {
       formData.append('finished', finished_)
       formData.append('subject', subjects_)
 
-      axios.post("http://localhost:8000/api/homework/", formData)
+      axiosInstance.post("http://localhost:8000/api/homework/", formData)
       .then((response) =>getHomework())
       .then(response=> alert('Homework added succesfully!'))
-      .catch((error) =>alert(`${error.message}\nTitle and subject are required to create homework.`))
+      .catch((error) =>{
+        if(title==='' && subjects_===''){
+          alert(`${error.message}\nTitle and subject are required to create homework.`)
+        } else if(title===''){
+          alert(`${error.message}\nTitle is required to create homework.`)
+        } else if(subjects_===''){
+          alert(`${error.message}\nSubject is required to create homework.`)
+        }
+      })
 
 
   }
@@ -89,7 +99,7 @@ function App() {
       formData.append('subject', subject)
       
       console.log(formData)
-      axios.put(`http://localhost:8000/api/update-homework/${id}`, formData)
+      axiosInstance.put(`http://localhost:8000/api/update-homework/${id}`, formData)
       .then((response) =>{
           getHomework()
           setHomework([response.data, ...homework])
@@ -99,7 +109,7 @@ function App() {
 
   // deletes the homework
   const deleteHomework =(id)=>{
-      axios.delete(`http://localhost:8000/api/delete-homework/${id}`, {
+      axiosInstance.delete(`http://localhost:8000/api/delete-homework/${id}`, {
         data: {
           source: 'source'
         }
@@ -112,7 +122,7 @@ function App() {
     const createSubject=()=>{
       let formData = new FormData()
       formData.append('name', subjectText)
-      axios.post("http://localhost:8000/api/subject/", formData)
+      axiosInstance.post("http://localhost:8000/api/subject/", formData)
       .then((response) =>getSubjects())
       .then((response)=> setShowSubjectForm(false))
       .catch((error) =>alert(`${error.message}\nYou need to provide a name for the subject.`))
@@ -120,7 +130,7 @@ function App() {
 
   // deletes the subject
   const deleteSubject_ =(id)=>{
-    axios.delete(`http://localhost:8000/api/delete-subject/${id}`, {
+    axiosInstance.delete(`http://localhost:8000/api/delete-subject/${id}`, {
       data: {
         source: 'source'
       }
@@ -161,6 +171,12 @@ function App() {
         </Route>
         <Route path="/pomodoro">
           <Pomodoro/>
+        </Route>
+        <Route exact path="/login">
+          <Login/>
+        </Route>
+        <Route exact path="/register">
+          <Register/>
         </Route>
       </Switch>
     </Router>

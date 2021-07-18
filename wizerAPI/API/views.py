@@ -52,6 +52,21 @@ class SubjectDeleteView(generics.DestroyAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
+
+# authentication stuff
+
+class user_logged_in(APIView):
+    def get(self, request):
+        user = self.request.user
+        if user.is_authenticated:
+            content = {
+                'id': str(user.id),
+                'auth': str(self.request.auth),
+                'username': str(user),
+            }
+            return Response(content)
+        return Response({"Info":"User is not authenticated"})
+
 class custom_user_register(APIView):
     permission_classes = [AllowAny,]
 
