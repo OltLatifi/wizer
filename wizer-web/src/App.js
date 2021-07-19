@@ -5,12 +5,12 @@ import YourHomework from './components/dashboard/YourHomework'
 import Pomodoro from './components/pomodoro/Pomodoro'
 import Login from './components/authentication/Login'
 import Register from './components/authentication/Register'
+import Navbar from './components/Navbar'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 function App() {
@@ -141,6 +141,7 @@ function App() {
   
   return (
     <Router>
+      <Navbar/>
       <Switch>
         <Route path='/dashboard'>
 

@@ -24,7 +24,7 @@ function Filters(props) {
     const classes = useStyles();
 
     return (
-        <Card style={{padding: '2%', width:'100%', height:'auto',}}>
+        <Card style={{padding: '2%', width:'100%', height:'auto'}}>
         <Typography variant="h6" component="h6" className={classes.text}>Filter by categories</Typography>
 
         <ButtonGroup variant="outlined" aria-label="small outlined primary button group">

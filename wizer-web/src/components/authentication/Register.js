@@ -4,9 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+
 
 import axiosInstance from '../../axios';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 
 
 
@@ -18,9 +20,6 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
           }},
-    input: {
-        width: '60%'
-    }
   }));
   
 function Register(props) {
@@ -40,16 +39,6 @@ function Register(props) {
 
     const buttonPressed=(e)=>{
 
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-        
-            body: JSON.stringify({
-                username: username,
-                email: email,
-                password: password,
-            })
-        }
         
         if(password === confirmPassword){
             if(username.split(' ').length < 2){
@@ -57,13 +46,24 @@ function Register(props) {
             } else{
                 setUsernameWarning(true)
             }
-            if(password.split('').length>=8 && (email.includes('@','`','!','#','$','%','^','&','*','(',')','-','=','+','[',']','{','}',';',':','\'','"','<','>',',','.','?','/','|') && email.includes('1','2','3','4','5','6','7','8','9','0'))){
+            if(password.split('').length>=8 && (email.includes('@','`','!','#','$','%','^','&','*','(',')','-','=','+','[',']','{','}',';',':','\'','"','<','>',',','.','?','/','|') || email.includes('1','2','3','4','5','6','7','8','9','0'))){
                 setShowPasswordWarning(false)
                 
                 // if the email is not valid (doesn't contain '@example.com')
                 if(email.split('@').length>1 ){
-                    fetch("/api/register/", requestOptions)
-                    // .then((response) => props.history.push('/'));
+                    setShowEmailWarning(false)
+
+                    const registerFormData = new FormData()
+                    registerFormData.append('username', username)
+                    registerFormData.append('email', email)
+                    registerFormData.append('password', password)
+
+                    const loginFormData = new FormData()
+                    loginFormData.append('username', username)
+                    loginFormData.append('password', password)
+
+                    axiosInstance.post("http://localhost:8000/api/register/", registerFormData)
+                    .catch(error=> alert(`Your username is already taken or contains a space.\n${error.message}`))
                 }else{
                     setShowEmailWarning(true)
                 }
@@ -89,7 +89,15 @@ function Register(props) {
     const renderEmailWarning=()=>{
         if(showEmailWarning){
             return(
-                <Typography variant='body2'>Please enter a valid email address</Typography>
+                <div style={{
+                    width: '70%',
+                    backgroundColor:'#ffd1d6',
+                    color:'black',
+                    border:'2px solid #fca4ad',
+                    borderRadius:4}}>
+                    <Typography variant='body2'>Please enter a valid email address</Typography>
+                </div>
+                
             )
         }
     }
@@ -97,7 +105,17 @@ function Register(props) {
     const renderPasswordWarning=()=>{
         if(showPasswordWarning){
             return(
-                <Typography variant='body2'>Please enter a password longer than 8 characters and include numbers and symbols</Typography>
+                <div style={{
+                    width: '70%',
+                    backgroundColor:'#ffd1d6',
+                    color:'black',
+                    border:'2px solid #fca4ad',
+                    borderRadius:4}}>
+                    <Typography variant='body2'>
+                        Please enter a password that contains 8 or more characters and includes at least a number or a symbol
+                    </Typography>
+                    </div>
+                
             )
         }
     }
@@ -105,7 +123,14 @@ function Register(props) {
     const renderUsernameWarning=()=>{
         if(showUsernameWarning){
             return(
-                <Typography variant='body2'>Your username cannot include spaces in beetween</Typography>
+                <div style={{
+                    width: '70%',
+                    backgroundColor:'#ffd1d6',
+                    color:'black',
+                    border:'2px solid #fca4ad',
+                    borderRadius:4}}>
+                    <Typography variant='body2'>Your username cannot include spaces in beetween</Typography>
+                    </div>
             )
         }
     }
@@ -116,22 +141,24 @@ function Register(props) {
         <center>
         <div  style={{display:'flex', flexDirection:'row', paddingBottom:'9%'}}>
             <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">
+                <Card style={{padding:'2%', width:'80%'}}>
                 <Typography variant="h2" component="h2">
                     Register
                 </Typography><br/>
-                <div className="Login">
+                <div className="form_">
                     <div>
                         <TextField
-                            className={classes.input}
+                            style={{width:'70%'}}
                             onChange={(e)=>setUsername(e.target.value)}
                             label="Username"
                             variant="outlined"
                             placeholder="e.g. JohnDoe" />
                             {renderUsernameWarning()}
                     </div>
+                            
                     <div>            
                         <TextField
-                            className={classes.input}
+                            style={{width:'70%'}}
                             onChange={(e)=>setEmail(e.target.value)}
                             label="Email"
                             variant="outlined"
@@ -140,7 +167,7 @@ function Register(props) {
                     </div>
                     <div>
                         <TextField
-                            className={classes.input}
+                            style={{width:'70%'}}
                             onChange={(e)=>setPassword(e.target.value)}
                             label="Password"
                             type="password"
@@ -148,7 +175,7 @@ function Register(props) {
                     </div>
                     <div>
                         <TextField
-                            className={classes.input}
+                            style={{width:'70%'}}
                             onChange={(e)=>setConfirmPassword(e.target.value)}
                             label="Confirm password"
                             type="password"
@@ -157,11 +184,12 @@ function Register(props) {
                     {renderPasswordWarning()}
                     <div>
                         <Button
-                            style={{margin:'1%', width: '60%'}}
+                            style={{margin:'1%', width: '70%'}}
                             variant="contained"
                             onClick={buttonPressed}>Register</Button>
                     </div>
                 </div>
+            </Card>
             </form>
         </div>
         </center>

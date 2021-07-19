@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+
 
 import axiosInstance from '../../axios';
 
@@ -53,28 +55,30 @@ function Login(props) {
     return (
         <>
         <center>
-        <div style={{display:'flex', flexDirection:'row', paddingBottom:'14%'}}>
-            <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">
-                <Typography variant="h2" component="h2">
-                    Log In
-                </Typography>
-                <Typography variant="body2" component="h6" style={{margin:'2% 0'}}>
-                    Don't have an account?
-                </Typography>
-                <div className="Login">
-                    <div>
-                        <TextField style={{width: '60%'}} id="outlined-basic" onChange={(e)=>{setUsername(e.target.value)}} label="Name" variant="outlined" />
+                <div style={{display:'flex', flexDirection:'row', paddingBottom:'14%'}}>
+                <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">
+                    <Card style={{padding:'2%', width:'80%'}}>
+                    <Typography variant="h2" component="h2">
+                        Log In
+                    </Typography>
+                    <Typography variant="body2" component="h6" style={{margin:'2% 0'}}>
+                        Don't have an account? <a href={'/register'} style={{color:'blue', textDecoration:'none'}}>Register</a>
+                    </Typography>
+                    <div className="form_">
+                        <div>
+                            <TextField style={{width: '70%'}} id="outlined-basic" onChange={(e)=>{setUsername(e.target.value)}} label="Username" variant="outlined" />
+                        </div>
+                        <div>
+                            <TextField style={{width: '70%'}} id="outlined-basic" onChange={(e)=>{setPassword(e.target.value)}} label="Password" type="password" variant="outlined" />
+                        </div>
+                        <div>
+                            <Button style={{margin:'1%', width: '70%'}} variant="contained" onClick={buttonPressed}>Log in</Button>
+                        </div>
                     </div>
-                    <div>
-                        <TextField style={{width: '60%'}} id="outlined-basic" onChange={(e)=>{setPassword(e.target.value)}} label="Password" type="password" variant="outlined" />
-                    </div>
-                    <div>
-                        <Button style={{margin:'1%', width: '60%'}} variant="contained" color="primary" onClick={buttonPressed}>Log in</Button>
-                    </div>
+                    <br/>
+                    </Card>
+                </form>
                 </div>
-                <br/>
-            </form>
-        </div>
         </center>
 
         
