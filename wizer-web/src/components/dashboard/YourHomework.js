@@ -28,8 +28,8 @@ const useStyles = makeStyles({
     ribbon:{
         display:'flex',
         flexDirection:'row',
-        backgroundColor:'black',
-        color:'white'
+        backgroundColor:'lightgray',
+        color:'black'
     }
   });
 
@@ -90,7 +90,7 @@ function YourHomework({homework, setMenuItems, setSubjectText, createSubject,
                 <div className={classes.ribbon}>
                     <Typography style={{width:'90%', marginLeft:'5%'}}>
                         🎉You finished all your homework! Feel free to delete them🎉
-                        <Button onClick={()=>{setEverythingFinished(false)}} style={{color:'white'}}>Ok</Button>
+                        <Button onClick={()=>{setEverythingFinished(false)}}>Ok</Button>
                     </Typography>
                 </div>
                 )

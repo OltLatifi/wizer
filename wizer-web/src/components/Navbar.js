@@ -21,8 +21,13 @@ import AccessTimeRoundedIcon from '@material-ui/icons/AccessTimeRounded';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-// import axios from 'axios';
+import axiosInstance from '../axios';
 import clsx from 'clsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+// import { useHistory } from "react-router";
+
+
 
 
 
@@ -89,9 +94,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Navbar() {
+function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
+
   const [open, setOpen] = React.useState(false);
 
   const [accessToken, setAccessToken] = useState((localStorage.getItem('access_token')));
@@ -110,12 +116,28 @@ export default function Navbar() {
     }, []
   );
 
+  const logout=(props)=>{
+
+    axiosInstance.post(`http://localhost:8000/api/logout`, {
+        refresh_token: localStorage.getItem('refresh_token'),
+            }
+        );
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        axiosInstance.defaults.headers['Authorization'] = null;
+
+        window.location.reload(false);
+        
+
+  
+  }
+
 
   function checkLogIn(){
     if(accessToken !== null){
       return(
               <>
-                <Button href={'/logout'} style={{marginRight: theme.spacing(2)}}>Logout</Button>
+                <Button onClick={logout} style={{marginRight: theme.spacing(2)}}>Logout</Button>
               </>
             );
     } else {
@@ -129,6 +151,7 @@ export default function Navbar() {
 
   return (
     <div className={classes.root}>
+      <ToastContainer />
       <CssBaseline />
       <AppBar
         // color='default'
@@ -199,3 +222,5 @@ export default function Navbar() {
     
   );
 }
+
+export default Navbar

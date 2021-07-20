@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import axiosInstance from '../../axios';
 // import { withRouter } from 'react-router';
@@ -63,7 +65,29 @@ function Register(props) {
                     loginFormData.append('password', password)
 
                     axiosInstance.post("http://localhost:8000/api/register/", registerFormData)
-                    .catch(error=> alert(`Your username is already taken or contains a space.\n${error.message}`))
+                    .then(registration => {if(registration.status===201){
+                        toast.success('User registered succesfully!', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            })
+                    }})
+                    .catch(error=> {
+                        toast.error(`Your username is already taken or contains a space.\n${error.message}`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            })
+                    })
+
                 }else{
                     setShowEmailWarning(true)
                 }
@@ -138,6 +162,7 @@ function Register(props) {
     
     return(
         <>
+        <ToastContainer/>
         <center>
         <div  style={{display:'flex', flexDirection:'row', paddingBottom:'9%'}}>
             <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">

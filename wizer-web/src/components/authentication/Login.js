@@ -55,30 +55,30 @@ function Login(props) {
     return (
         <>
         <center>
-                <div style={{display:'flex', flexDirection:'row', paddingBottom:'14%'}}>
-                <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">
-                    <Card style={{padding:'2%', width:'80%'}}>
-                    <Typography variant="h2" component="h2">
-                        Log In
-                    </Typography>
-                    <Typography variant="body2" component="h6" style={{margin:'2% 0'}}>
-                        Don't have an account? <a href={'/register'} style={{color:'blue', textDecoration:'none'}}>Register</a>
-                    </Typography>
-                    <div className="form_">
-                        <div>
-                            <TextField style={{width: '70%'}} id="outlined-basic" onChange={(e)=>{setUsername(e.target.value)}} label="Username" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField style={{width: '70%'}} id="outlined-basic" onChange={(e)=>{setPassword(e.target.value)}} label="Password" type="password" variant="outlined" />
-                        </div>
-                        <div>
-                            <Button style={{margin:'1%', width: '70%'}} variant="contained" onClick={buttonPressed}>Log in</Button>
-                        </div>
+            <div style={{display:'flex', flexDirection:'row', paddingBottom:'14%'}}>
+            <form className={classes.root} style={{margin:'4%'}} method="post" autoComplete="off">
+                <Card style={{padding:'2%', width:'80%'}}>
+                <Typography variant="h2" component="h2">
+                    Log In
+                </Typography>
+                <Typography variant="body2" component="h6" style={{margin:'2% 0'}}>
+                    Don't have an account? <a href={'/register'} style={{color:'blue', textDecoration:'none'}}>Register</a>
+                </Typography>
+                <div className="form_">
+                    <div>
+                        <TextField style={{width: '70%'}} onChange={(e)=>{setUsername(e.target.value)}} label="Username" variant="outlined" />
                     </div>
-                    <br/>
-                    </Card>
-                </form>
+                    <div>
+                        <TextField style={{width: '70%'}} onChange={(e)=>{setPassword(e.target.value)}} label="Password" type="password" variant="outlined" />
+                    </div>
+                    <div>
+                        <Button style={{margin:'1%', width: '70%'}} variant="contained" onClick={buttonPressed}>Log in</Button>
+                    </div>
                 </div>
+                <br/>
+                </Card>
+            </form>
+            </div>
         </center>
 
         
