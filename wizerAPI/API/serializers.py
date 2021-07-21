@@ -7,11 +7,13 @@ from django.contrib.auth import authenticate
 
 
 class SubjectSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
     class Meta:
         model = Subject
         fields = "__all__"
 
 class HomeworkSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
     class Meta:
         model = Homework
         fields = "__all__"

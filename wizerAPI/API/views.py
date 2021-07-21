@@ -23,25 +23,36 @@ class SubjectView(generics.CreateAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class HomeworkView(generics.CreateAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 # list
 class SubjectListView(generics.ListAPIView):
-    queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    def get_queryset(self):
+        queryset = Subject.objects.filter(user=self.request.user)
+        return queryset
 
 
 class HomeworkListView(generics.ListAPIView):
-    queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
+    def get_queryset(self):
+        queryset = Homework.objects.filter(user=self.request.user)
+        return queryset
+
 
 # update
 class HomeworkUpdateView(generics.UpdateAPIView):
     queryset = Homework.objects.all()
     serializer_class = HomeworkSerializer
+    
 
 # delete
 class HomeworkDeleteView(generics.DestroyAPIView):
