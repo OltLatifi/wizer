@@ -46,6 +46,7 @@ function App() {
           setHomework(response.data)
           setMenuItems(response.data)
       })
+      .catch((error)=>console.log('You are not logged in'))
   
       }
     // get the subjects from the api
@@ -54,6 +55,7 @@ function App() {
         .then(response => {
             setSubjects(response.data)
         })
+        .catch((error)=>console.log('You are not logged in'))
     }
 
     // on render call the function that gets the homework data
@@ -80,11 +82,11 @@ function App() {
       .then(response=> alert('Homework added succesfully!'))
       .catch((error) =>{
         if(title==='' && subjects_===''){
-          alert(`${error.message}\nTitle and subject are required to create homework.`)
+          alert(`${error.message}\nTitle and subject are required to create homework. You also need to be logged in.`)
         } else if(title===''){
-          alert(`${error.message}\nTitle is required to create homework.`)
+          alert(`${error.message}\nTitle is required to create homework. You also need to be logged in.`)
         } else if(subjects_===''){
-          alert(`${error.message}\nSubject is required to create homework.`)
+          alert(`${error.message}\nSubject is required to create homework. You also need to be logged in.`)
         }
       })
 
@@ -125,7 +127,7 @@ function App() {
       axiosInstance.post("http://localhost:8000/api/subject/", formData)
       .then((response) =>getSubjects())
       .then((response)=> setShowSubjectForm(false))
-      .catch((error) =>alert(`${error.message}\nYou need to provide a name for the subject.`))
+      .catch((error) =>alert(`${error.message}\nYou need to login and provide a name for your subject`))
   }
 
   // deletes the subject

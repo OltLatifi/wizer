@@ -11,15 +11,12 @@ from .views import (
     SubjectDeleteView,
 
     custom_user_register,
-    user_logged_in,
-    blacklist_token_view,
     )
 
 urlpatterns = [
     # users
     path('register/', custom_user_register.as_view()),
-    path('loged-in/', user_logged_in.as_view()),
-    path('logout/', blacklist_token_view.as_view()),
+    # path('logout/', blacklist_token_view.as_view()),
     # evrything else
     path('subject/', SubjectView.as_view()),
     path('homework/', HomeworkView.as_view()),

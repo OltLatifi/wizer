@@ -6,8 +6,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
+import FacebookLogin from 'react-facebook-login';
+import fbLogin from './FacebookLogin';
+import axios from 'axios';
 
-import axiosInstance from '../../axios';
+const loginInstance = axios.create({
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+    },
+})
+
 
 
 
@@ -30,20 +40,29 @@ function Login(props) {
 
     const buttonPressed=(e)=>{
 
-        axiosInstance.post('http://localhost:8000/api/token/', {
+        loginInstance.post('http://localhost:8000/auth/token/', {
+            grant_type:'password',
             username:username,
-            password:password
+            password:password,
+            client_id:'v64mPi1R9ofTJqsuzyjOtZJe6O0zTM6VmGDVgYOG',
+            client_secret:'Ylf6nay64p5GCYrenSLpsJofAj8F2QC0sfbykc58ocYctkyQ51bheTAwzY7JBqMQqDreqwm4UNccTK1utfhhElTTuwSd9mDZ9UXLUPIFzpGWrcWMT4j1gz5R7WznO5II',
         })
         .then((response)=>{
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            axiosInstance.defaults.headers['Authorization'] = 
-            `JWT ${localStorage.getItem('access_token')}`
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('refresh_token', response.data.refresh_token);
+            loginInstance.defaults.headers['Authorization'] = 
+            `Bearer ${localStorage.getItem('access_token')}`
             window.location.reload(false)
+            // console.log(response)
         })
 
 
         
+    }
+
+    const responseFacebook = (response) =>{
+        // fbLogin(response.accessToken)
+        console.log(response)
     }
 
     const classes = useStyles();
@@ -73,6 +92,12 @@ function Login(props) {
                     </div>
                     <div>
                         <Button style={{margin:'1%', width: '70%'}} variant="contained" onClick={buttonPressed}>Log in</Button>
+                        <br/>
+                        <FacebookLogin
+                            appId='855302761745087'
+                            fields='name, email'
+                            callBack={responseFacebook}
+                        />
                     </div>
                 </div>
                 <br/>

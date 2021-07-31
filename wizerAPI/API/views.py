@@ -16,7 +16,6 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
 
 # create
 class SubjectView(generics.CreateAPIView):
@@ -66,18 +65,6 @@ class SubjectDeleteView(generics.DestroyAPIView):
 
 # authentication stuff
 
-class user_logged_in(APIView):
-    def get(self, request):
-        user = self.request.user
-        if user.is_authenticated:
-            content = {
-                'id': str(user.id),
-                'auth': str(self.request.auth),
-                'username': str(user),
-            }
-            return Response(content)
-        return Response({"Info":"User is not authenticated"})
-
 class custom_user_register(APIView):
     permission_classes = [AllowAny,]
 
@@ -88,15 +75,3 @@ class custom_user_register(APIView):
             if new_user:
                 return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class blacklist_token_view(APIView):
-    permission_classes = [AllowAny,]
-
-    def post(self, request):
-        try:
-            refresh_token = request.data.get['refresh_token']
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)

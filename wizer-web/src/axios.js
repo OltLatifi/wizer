@@ -5,12 +5,13 @@ const axiosInstance = axios.create({
     timeout: 5000,
     headers: {
         Authorization: localStorage.getItem('access_token')
-        ? `JWT ${localStorage.getItem('access_token')}`// this is like saying 'Bearer 49582048902485kfjdkj'
+        ? `Bearer ${localStorage.getItem('access_token')}`// this is like saying 'Bearer 49582048902485kfjdkj'
         : null,                                        // so it's just the access token on the header 
         'Content-Type': 'application/json',            // if there is a token format it, else return null
         accept: 'application/json'
     },
 })
+
 
 // axios.interceptors.response.use(
 //     (response) => {

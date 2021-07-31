@@ -14,7 +14,6 @@ import ListItem from '@material-ui/core/ListItem';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PostAddRoundedIcon from '@material-ui/icons/PostAddRounded';
-import FilterListRoundedIcon from '@material-ui/icons/FilterListRounded';
 // import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import AccessTimeRoundedIcon from '@material-ui/icons/AccessTimeRounded';
 
@@ -23,7 +22,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import axiosInstance from '../axios';
 import clsx from 'clsx';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 // import { useHistory } from "react-router";
 
