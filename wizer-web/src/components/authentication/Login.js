@@ -6,8 +6,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
-import FacebookLogin from 'react-facebook-login';
-import fbLogin from './FacebookLogin';
 import axios from 'axios';
 
 const loginInstance = axios.create({
@@ -60,10 +58,6 @@ function Login(props) {
         
     }
 
-    const responseFacebook = (response) =>{
-        // fbLogin(response.accessToken)
-        console.log(response)
-    }
 
     const classes = useStyles();
 
@@ -93,11 +87,6 @@ function Login(props) {
                     <div>
                         <Button style={{margin:'1%', width: '70%'}} variant="contained" onClick={buttonPressed}>Log in</Button>
                         <br/>
-                        <FacebookLogin
-                            appId='855302761745087'
-                            fields='name, email'
-                            callBack={responseFacebook}
-                        />
                     </div>
                 </div>
                 <br/>

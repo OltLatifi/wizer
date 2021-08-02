@@ -6,6 +6,7 @@ import Pomodoro from './components/pomodoro/Pomodoro'
 import Login from './components/authentication/Login'
 import Register from './components/authentication/Register'
 import Navbar from './components/Navbar'
+import Frontpage from './components/frontpage/Frontpage'
 
 import {
   BrowserRouter as Router,
@@ -143,11 +144,17 @@ function App() {
   
   return (
     <Router>
-      <Navbar/>
-      <Switch>
-        <Route path='/dashboard'>
+      <div>
+
+        <Switch>
+
+        <Route exact path="/">
+          <Frontpage/>
+        </Route>
 
         <div className="App">
+          <Navbar/>
+          <Route path='/dashboard'>
           <YourHomework
             homework={homework}
             setMenuItems={setMenuItems}
@@ -169,9 +176,8 @@ function App() {
             showSubjectForm={showSubjectForm}
             setShowSubjectForm={setShowSubjectForm}
             />
-        </div>
+            </Route>
 
-        </Route>
         <Route path="/pomodoro">
           <Pomodoro/>
         </Route>
@@ -181,7 +187,11 @@ function App() {
         <Route exact path="/register">
           <Register/>
         </Route>
+        </div>
+        
+        
       </Switch>
+      </div>
     </Router>
     
   );
