@@ -28,6 +28,16 @@ const useStyles = makeStyles((theme) => ({
         width:150,
         height:50,
         marginRight:'2%',
+    },
+    navbar:{
+        display: 'flex',
+        flexDirection: 'row',
+        margin: '0 33%',
+    },
+    navbarElements:{
+        margin:'4%',
+        color:'gray',
+        textDecoration:'none',
     }
 }));
 
@@ -35,7 +45,23 @@ function Frontpage() {
     const classes = useStyles()
     return (
         <div className={classes.root}>
-            <div style={{width: '50%', marginTop:' 10%', marginLeft:'33%'}}>
+            <div className={classes.navbar}>
+                <h3 className={classes.navbarElements}>
+                    Wizer
+                </h3>
+                <h3 className={classes.navbarElements}>
+                    <a href='/register' style={{textDecoration:'none', color:'gray'}}>
+                        Register
+                    </a>
+                </h3>
+                <h3 className={classes.navbarElements}>
+                    <a href='/login' style={{textDecoration:'none', color:'gray'}}>
+                        Login
+                    </a>
+                </h3>
+                <h3 className={classes.navbarElements}>Get the app</h3>
+            </div>
+            <div style={{width: '50%', marginTop:' 6%', marginLeft:'33%'}}>
                 <h1 className={classes.mainText}>
                     Keep track<br/>of your <span className={classes.blueText}>work</span>
                 </h1>
@@ -49,8 +75,8 @@ function Frontpage() {
                 </div>
                 <br/>
                 <div>
-                    <Button className={classes.button} style={{backgroundColor:'aqua'}}>Dashboard</Button>
-                    <Button className={classes.button} style={{color:'aqua', border:'2px solid aqua'}}>Pomodoro</Button>
+                    <Button href='/dashboard' className={classes.button} style={{backgroundColor:'aqua'}}>Dashboard</Button>
+                    <Button href='/pomodoro'className={classes.button} style={{color:'aqua', border:'2px solid aqua'}}>Pomodoro</Button>
                 </div>
 
             </div>

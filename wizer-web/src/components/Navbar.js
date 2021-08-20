@@ -136,13 +136,13 @@ function Navbar() {
     if(accessToken !== null){
       return(
               <>
-                <Button onClick={logout} style={{marginRight: theme.spacing(2)}}>Logout</Button>
+                <Button onClick={logout} style={{marginRight: theme.spacing(2), color:'aqua'}}>Logout</Button>
               </>
             );
     } else {
       return(
               <>
-                <Button href={'/login'} style={{marginRight: theme.spacing(2)}}>Login</Button>
+                <Button href={'/login'} style={{marginRight: theme.spacing(2), color:'aqua'}}>Login</Button>
               </>);
     }
 
@@ -154,32 +154,35 @@ function Navbar() {
       <CssBaseline />
       <AppBar
         // color='default'
-        style={{display:'flex',flexDirection:'row', backgroundColor:'lightgray'}}
+        style={{display:'flex',flexDirection:'row', backgroundColor:'#1a1a1aff', }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{flexGrow:1,}}>
+        
+        <Toolbar style={{flexGrow:1, }}>
           <IconButton
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
+            style={{color:'aqua'}}
           >
             <MenuIcon />
           </IconButton>
           {/* <a href={'/'} style={{color:'white'}}><img src={'../../../images/icon_w.svg'} width="50" height="50" alt="icon"/></a> */}
           <Typography variant="h6" noWrap>
-            <a href={'/'} style={{textDecoration:'none', color:'black'}}>Wizer</a>
+            <a href={'/'} style={{textDecoration:'none', color:'aqua'}}>Wizer</a>
           </Typography>
           
         </Toolbar>
         {checkLogIn()}
-        <Button href={'/register'}>Register</Button>
+        <Button href={'/register'} style={{color:'aqua'}}>Register</Button>
 
       </AppBar>
       <Drawer
+        style={{backgroundColor:'#1a1a1aff',}}
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -188,25 +191,27 @@ function Navbar() {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+        <div style={{backgroundColor:'#1a1a1aff', minHeight: '100%',}}>
+        <div className={classes.drawerHeader} style={{backgroundColor:'#1a1a1aff',}}
+        >
+          <IconButton onClick={handleDrawerClose} style={{color:'aqua'}}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List style={{backgroundColor:'#1a1a1aff', color:'aqua'}}>
         {/* <ListItem>
           <img src={'../../../images/logo.svg'} width="300" height="150" alt="logo"/>
         </ListItem> */}
         {/* <Divider /> */}
         <ListItem button ><HomeOutlinedIcon/>
-          <Button href={'/'}>Home</Button>
+          <Button href={'/'} style={{color:'white'}}>Home</Button>
         </ListItem>
         <ListItem button><PostAddRoundedIcon/>
-          <Button href={'/dashboard'}>Dashboard</Button>
+          <Button href={'/dashboard'} style={{color:'white'}}>Dashboard</Button>
         </ListItem>
         <ListItem button><AccessTimeRoundedIcon/>
-          <Button href={'/pomodoro'}>Pomodoro</Button>
+          <Button href={'/pomodoro'} style={{color:'white'}}>Pomodoro</Button>
         </ListItem>
         {/* <ListItem button><DescriptionOutlinedIcon/>
           <Button href={'/articles'}>Artikuj</Button>
@@ -216,6 +221,8 @@ function Navbar() {
         </ListItem> */}
         
         </List>
+        </div>
+        
       </Drawer>
       </div>
     

@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     input: {
         width: '60%',
         marginRight:'1%',
+        marginTop:'20px',
     },
   });
 
@@ -21,7 +22,7 @@ function SubjectForm({setSubject, submitButton, setShowSubjectForm}) {
 
     return(
         <div className={classes.root}>
-            <Typography variant="h6">Add a new subject</Typography>
+            <Typography variant="h6" style={{ color: "white" }}>Add a new subject</Typography>
             <TextField
                 size='small'
                 className={classes.input}
@@ -29,10 +30,13 @@ function SubjectForm({setSubject, submitButton, setShowSubjectForm}) {
                 label="Subject"
                 variant="outlined"
                 onChange={(e)=>{setSubject(e.target.value)}}
+                InputLabelProps={{ style: { color: "white" } }}
+                InputProps={{ style: { color: "white" } }}
                 />
             {submitButton}  {/* button from parent*/}
-            <Typography variant="body2">Fill in the form to create a new subject.
-                <Button onClick={()=>setShowSubjectForm(false)}>Cancel</Button>
+            
+            <Typography variant="body2" style={{ color: "white", marginTop: "20px" }} >Fill in the form to create a new subject.
+                <Button onClick={()=>setShowSubjectForm(false)} style={{ color: "white" }}>Cancel</Button>
             </Typography>
         </div>
     )

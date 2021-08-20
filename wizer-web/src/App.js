@@ -152,7 +152,7 @@ function App() {
           <Frontpage/>
         </Route>
 
-        <div className="App">
+        <div className="App" style={{backgroundColor:'#1a1a1aff', minHeight:'100%'}}>
           <Navbar/>
           <Route path='/dashboard'>
           <YourHomework

@@ -53,11 +53,11 @@ MIDDLEWARE = [
 
 
 # so i can fetch the data from the api from react
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
-    'https://localhost:3000',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'https://localhost:3000',
+# )
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[

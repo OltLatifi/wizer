@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     input: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
     },
     form:{
         width:'50%',
-        backgroundColor:'white'
+        backgroundColor:'gray',
     },
     checkbox: {
         display: 'flex',
@@ -22,6 +23,8 @@ const useStyles = makeStyles({
         height:50,
         minWidth: 100,
         width: '80%',
+        backgroundColor:'gray',
+
     },
   });
 
@@ -62,7 +65,7 @@ function HomeworkForm({title, date, description, finished, subjects, buttonPress
                 <br/><br/>
             <center>
             <Card variant="outlined" className={classes.checkbox}>
-                <label htmlFor="finished">Finished: </label>
+                <label htmlFor="finished" style={{marginLeft:'-4%'}}><Typography variant="body1" color="textSecondary">Finished </Typography></label>
                 <input
                     id="finished"
                     name="finished"
