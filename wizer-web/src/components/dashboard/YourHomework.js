@@ -129,7 +129,7 @@ function YourHomework({
           submitButton={
             <Button
               variant="outlined"
-              style={{ height: 40, marginTop:'20px', color:'white' }}
+              style={{ height: 40, marginTop: "20px", color: "white" }}
               onClick={createSubject}
             >
               Submit

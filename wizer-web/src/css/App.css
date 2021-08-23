@@ -14,3 +14,31 @@
       width:50%;
   }
 }
+
+
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 132px;
+  transform: rotateY(180deg);
+  background-color: #2d2d2d;
+}
+
+.wave .shape-fill {
+  fill: #1a1a1aff;
+}
+
+section{
+  position: relative;
+}

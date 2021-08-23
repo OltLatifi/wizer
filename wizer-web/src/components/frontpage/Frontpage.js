@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
 function Frontpage() {
     const classes = useStyles()
     return (
-        <div className={classes.root}>
+        <>
+        <section className={classes.root}>
             <div className={classes.navbar}>
                 <h3 className={classes.navbarElements}>
                     Wizer
@@ -78,9 +79,18 @@ function Frontpage() {
                     <Button href='/dashboard' className={classes.button} style={{backgroundColor:'aqua'}}>Dashboard</Button>
                     <Button href='/pomodoro'className={classes.button} style={{color:'aqua', border:'2px solid aqua'}}>Pomodoro</Button>
                 </div>
-
             </div>
-        </div>
+            </section>
+           
+            <section style={{height:'600px', backgroundColor:'#2d2d2d'}}>
+                
+                <div className="wave">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill"></path>
+                    </svg>
+                </div>haha
+            </section>
+        </>
     )
 }
 
