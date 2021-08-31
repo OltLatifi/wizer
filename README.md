@@ -10,6 +10,9 @@ The API is made with python's Django Rest Framework, the frontend uses React. Au
 ### How to use
 1. Create an account.
 2. Log in to your account.
-3. Create subjects.
+3. Create subjects(press the plus button and fill in the input field, press the minus button and a subject to delete that subject).
 4. Create homework.
-5. Filter through your homework.
+5. Filter through your homework by pressing the rounded buttons.
+
+
+![Screenshot 2021-08-31 203646](https://user-images.githubusercontent.com/44296923/131558196-1c936481-9b9f-4faf-979e-0c8d43d603b6.png)
