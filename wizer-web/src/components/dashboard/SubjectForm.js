@@ -31,7 +31,7 @@ function SubjectForm({setSubject, submitButton, setShowSubjectForm}) {
                 variant="outlined"
                 onChange={(e)=>{setSubject(e.target.value)}}
                 InputLabelProps={{ style: { color: "white" } }}
-                InputProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "white" },  maxLength: 255  }}
                 />
             {submitButton}  {/* button from parent*/}
             

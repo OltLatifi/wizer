@@ -40,8 +40,9 @@ function HomeworkForm({title, date, description, finished, subjects, buttonPress
                 variant="outlined"
                 className={classes.input}
                 onChange={e => title(e.target.value)}
+                inputProps={{ maxLength: 200 }}
                 // ref={textInput}
-                />
+                /> 
                 <br/><br/>
             <TextField
                 variant="outlined"
@@ -60,6 +61,7 @@ function HomeworkForm({title, date, description, finished, subjects, buttonPress
                 rows={12}
                 className={classes.input}
                 onChange={e =>description(e.target.value)}
+                inputProps={{ maxLength: 500 }}
                 // ref={textInput}
                 />
                 <br/><br/>
