@@ -1,3 +1,5 @@
+import Beep from './beep.wav'
+import Sound from 'react-sound';
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -31,13 +33,15 @@ const useStyles = makeStyles({
 function Pomodoro() {
   const classes = useStyles();
 
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(5);
 
   const [rest, setRest] = useState(5);
   const [displayMessage, setDisplayMessage] = useState(false);
   const [start, setStart] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [alarm, setAlarm] = useState(false);
+  const [alarmButton, setAlarmButton] = useState(false);
 
   const timer = () => {
     let interval = setInterval(() => {
@@ -54,6 +58,8 @@ function Pomodoro() {
           setSeconds(seconds);
           setMinutes(minutes_);
           setDisplayMessage(!displayMessage);
+          setAlarm(true)
+          setAlarmButton(true)
         }
       } else {
         setSeconds(seconds - 1);
@@ -66,6 +72,19 @@ function Pomodoro() {
       timer();
     }
   };
+
+  const stopButton = () => {
+    if(alarmButton){
+      return(
+        <Button onClick={() => {
+          setAlarm(false)
+          setAlarmButton(false)
+          }}
+          style={{ color: "#fff" }}>Stop the alarm!
+          </Button>
+      )
+    } 
+  }
 
   const renderSettingsButtons = () => {
     if (showSettings) {
@@ -110,12 +129,21 @@ function Pomodoro() {
 
   return (
     <>
+    <Sound
+      url={Beep}
+      autoPlay={true}
+      playStatus={alarm? Sound.status.PLAYING: Sound.status.STOPPED}
+    />
       <div className={classes.root}>
         <div className="message">
           {displayMessage && (
+            <>
             <Typography variant="h5" style={{ color: "#fff" }}>
               Break time!🎉 New session starts in:
+              {stopButton()}
             </Typography>
+            
+            </>
           )}
         </div>
         <br />
