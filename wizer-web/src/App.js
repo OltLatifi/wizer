@@ -7,6 +7,7 @@ import Login from './components/authentication/Login'
 import Register from './components/authentication/Register'
 import Navbar from './components/Navbar'
 import Frontpage from './components/frontpage/Frontpage'
+import Kanban from './components/kanban/Kanban'
 
 import {
   BrowserRouter as Router,
@@ -186,6 +187,9 @@ function App() {
         </Route>
         <Route exact path="/register">
           <Register/>
+        </Route>
+        <Route exact path="/kanban">
+          <Kanban homework={homework} />
         </Route>
         </div>
         
