@@ -47,7 +47,6 @@ function App() {
           setHomework(response.data)
           setMenuItems(response.data)
       })
-      .catch((error)=>console.log('You are not logged in'))
   
       }
     // get the subjects from the api
@@ -56,13 +55,14 @@ function App() {
         .then(response => {
             setSubjects(response.data)
         })
-        .catch((error)=>console.log('You are not logged in'))
     }
 
     // on render call the function that gets the homework data
     useEffect(()=> {
+      if(localStorage.getItem('access_token')!==null){
         getHomework()
         getSubjects()
+      }
     }, [])
 
 
